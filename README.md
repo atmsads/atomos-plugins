@@ -37,12 +37,19 @@ claude-plugins/
 Claude Code에서 아래 슬래시 커맨드 실행:
 
 ```
-/plugin marketplace add <이 레포지토리 git URL 또는 로컬 경로>
+/plugin marketplace add atmsads/atomos-plugins
 ```
 
-예:
+GitHub `owner/repo` 축약형을 쓴다. 다른 표기도 모두 동일 레포를 가리킨다:
+
 ```
-/plugin marketplace add git@github.com:ion-internal/claude-plugins.git
+/plugin marketplace add https://github.com/atmsads/atomos-plugins.git
+/plugin marketplace add git@github.com:atmsads/atomos-plugins.git
+```
+
+로컬 개발용(clone한 경로를 직접 가리키고 싶을 때):
+
+```
 /plugin marketplace add ~/Developer/ION/claude-plugins
 ```
 
@@ -62,6 +69,8 @@ Claude Code에서 아래 슬래시 커맨드 실행:
 /plugin marketplace update ion-execs
 /plugin update exec-marketing@ion-execs
 ```
+
+> marketplace **이름**은 `ion-execs`(내부 식별자), **repo 경로**는 `atmsads/atomos-plugins`(GitHub 위치). 설치 시 항상 `<plugin>@ion-execs` 형태로 참조한다.
 
 ## 개발 가이드
 - 새 팀 plugin 추가 시 `plugins/exec-<team>/` 디렉토리를 만들고 `.claude-plugin/plugin.json`을 작성한 뒤 루트 `marketplace.json`의 `plugins` 배열에 항목을 추가한다.
