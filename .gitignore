@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Temp / build artifacts
+tmp/
+.tmp/
+*.bak
+*.tmp
+.cache/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Claude Code local state (개인 설정/transcripts는 레포에 포함하지 않음)
+.claude/

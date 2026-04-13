@@ -1,0 +1,9 @@
+{
+  "name": "exec-marketing",
+  "version": "0.1.0",
+  "description": "ION 마케팅팀장용 업무 환경. ATMS MCP 기반 광고 운영·진단·리포팅 최적화.",
+  "author": {
+    "name": "ION Platform"
+  },
+  "keywords": ["executive", "marketing", "atms", "ads", "ion"]
+}

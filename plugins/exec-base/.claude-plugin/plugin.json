@@ -1,0 +1,9 @@
+{
+  "name": "exec-base",
+  "version": "0.1.0",
+  "description": "ION 팀장 공통 업무 환경. 모든 exec-<team> plugin이 override 대상으로 삼는 베이스.",
+  "author": {
+    "name": "ION Platform"
+  },
+  "keywords": ["executive", "base", "ion"]
+}

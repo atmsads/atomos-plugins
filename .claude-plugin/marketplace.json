@@ -1,0 +1,29 @@
+{
+  "name": "ion-execs",
+  "owner": {
+    "name": "ION",
+    "url": "https://github.com/ion-internal"
+  },
+  "metadata": {
+    "description": "ION 팀장별 Claude Code plugin 내부 마켓플레이스",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "exec-base",
+      "source": "./plugins/exec-base",
+      "description": "팀장 공통 업무 환경 (공통 agents/hooks/commands)",
+      "version": "0.1.0",
+      "category": "executive",
+      "tags": ["base", "common", "executive"]
+    },
+    {
+      "name": "exec-marketing",
+      "source": "./plugins/exec-marketing",
+      "description": "마케팅팀장용 환경 — ATMS MCP 연동 및 광고 운영 업무 최적화",
+      "version": "0.1.0",
+      "category": "executive",
+      "tags": ["marketing", "atms", "ads", "executive"]
+    }
+  ]
+}
