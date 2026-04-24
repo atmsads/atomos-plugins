@@ -35,3 +35,6 @@ tmp/
 
 # Claude Code local state (개인 설정/transcripts는 레포에 포함하지 않음)
 .claude/
+
+# Playwright MCP 세션 아티팩트 (subagent 실측 시 CWD 에 자동 생성)
+.playwright-mcp/
