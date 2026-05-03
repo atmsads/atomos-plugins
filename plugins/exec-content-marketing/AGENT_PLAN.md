@@ -260,13 +260,13 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 | **v1.2 정렬** — (C) "한 꼭짓점 경고" 출력 노출 의무 제거 (사용자 본인이 팀장이라 매 회차 경고 불필요) | ✅ 2026-04-27 | 성수 + 현승 |
 | **v1.3 미진 영역 3건 해소** — (1) 경각심 후킹=정보 내레이터 화자 우선, (2) 자막 인서트 데이터 강한 케이스 한정, (3) 분량 12~30 확장 | ✅ 2026-04-27 | 성수 + 현승 |
 | **(C) 옵션 6 분류 질문 보강** (레벨 0' — "일회성 vs 룰" 분류 질문 + 룰 답 시 명시 인용·운영자 검토 후 반영 안내. mempalace 의존성 제거) | ✅ 2026-04-27 | 성수 |
-| **피드백 영속화 방식 결정** — 현재 (C) 옵션 6 처리는 세션 트랜스크립트(jsonl)에만 기록 → 다음 세션에서 보이지 않음. 사용자 우려: 큐 파일 단순 누적 시 컨텍스트 폭발. 옵션 A(단일 큐 + 길이 cap) / B(단계별 태깅 큐 — 단계 진입 시 해당 태그만 grep 주입) / C(현재 유지 + 안내문구 정직화) 비교 후 결정 필요. 메모리 `project_feedback_persistence_options.md` 참조. | ⏸️ **보류** (사용자 추후 결정) | 성수 |
+| **피드백 영속화 방식 결정** — 2-tier + 단계 태깅 채택 (2026-05-03). Tier 1 (`~/.claude/exec-content-marketing/user-feedback.md`, 즉시 활성·다음 세션 자동 주입) → 24h 1회 Tier 2 (`plugins/exec-content-marketing/feedback-pending.md`, git 추적·운영자 검토 큐) → 운영자 정렬 회차에 정식 룰 승격. git add/commit/push 자동 안 함 (검증 게이트 보존). 옵션 6 처리에 단계 태깅 질문(②/③/④/공통) 추가. | ✅ 2026-05-03 | 성수 |
 | **Cowork 모드 plugin/MCP 동작 검증** — 데스크탑 앱의 Cowork(⌘2) 모드에서 `/plugin install`·MCP 동작 확인. 안 되면 Code 모드 권장 | ⏳ 사용자 직접 진행 | 성수 |
 | **Playwright MCP 헤드리스 모드 결정** — 차단율 vs 시각 방해 트레이드오프. 현재는 헤드 모드 유지 (검증된 동작) | ⏸️ 보류 | 성수 |
 | **피드백 자동화 레벨 결정** — 레벨 0 유지 (현재 패턴: 피드백 → 성수 묶어 처리). 레벨 1 도입 트리거: 정렬 매주 1회+ / 큐 10건+ / 사용자 명시 요청 | ✅ 2026-04-27 결정 | 성수 |
 | `storyboard-writer` v1 실측 → 병목 진단 → ④ 분리 여부 결정 | ⏳ 2~3케이스 실측 후 | 성수 + 현승 |
 | `script-writer` subagent 분리 (조건부 — ④가 병목일 때만) | ⏳ 분리 결정 후 | 성수 |
-| 플러그인 스켈레톤(plugin.json / CLAUDE.md / marketplace 엔트리) | ⏳ 피드백 영속화 결정 후 | 성수 |
+| 플러그인 스켈레톤(plugin.json / CLAUDE.md / marketplace 엔트리) | ⏳ 다음 (영속화 결정 완료) | 성수 |
 | 2번째 에이전트 스펙 (`image-brief-writer`) | 미정 (현재 플러그인 완성 후) | 성수 + 현승 |
 
 ## 5. 플러그인 등록 (예정)
@@ -366,11 +366,14 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 - [x] **(C) 옵션 6 분류 질문 보강** (2026-04-27)
   - [x] `commands/draft-storyboard.md` (C) 피드백 루프 옵션 6 (자유 입력) 처리에 분류 질문 1줄 추가 — "일회성 / 룰" 선택
   - [x] "룰" 답 시: `▶ 룰 후보로 기록: "<원문>"` 명시 인용 + 즉시 자동 반영 안 함·운영자 검토 후 정렬 회차 반영 안내. **mempalace 의존성 제거** — 현승님/민지님 환경에 mempalace 미설치이므로 Claude Code 세션 트랜스크립트(`~/.claude/projects/<cwd>/<session>.jsonl` 자동 보존)만 가정.
-- [ ] **피드백 영속화 방식 결정** (사용자 추후 결정 — 보류)
-  - [ ] 옵션 A 단일 큐 + 길이 cap / 옵션 B 단계별 태깅 큐 / 옵션 C 현재 유지 + 안내문구 정직화 중 택 1
-  - [ ] 채택 시 큐 파일 위치 (사용자 홈 vs plugin 내부) 결정
-  - [ ] 채택 시 컨텍스트 cap (항목 수 / 시간 / 둘 다) 결정
-  - [ ] 옵션 비교는 메모리 `project_feedback_persistence_options.md` 참조
+- [x] **피드백 영속화 방식 결정** (2026-05-03 결정)
+  - [x] 2-tier 구조 채택 (옵션 A·B·C 장점 결합) + 단계 태깅 (②/③/④/공통)
+  - [x] Tier 1 = 사용자 홈 (`~/.claude/exec-content-marketing/user-feedback.md`) — 옵션 6 "룰" 응답 즉시 append, 다음 세션부터 자동 주입
+  - [x] Tier 2 = 플러그인 내부 (`plugins/exec-content-marketing/feedback-pending.md`, git 추적) — 24h 1회 동기화, 운영자 검토 큐
+  - [x] 동기화 트리거: `/draft-storyboard` 첫 단계 (⓪ 영속화) — cron·hook 의존성 0
+  - [x] git add/commit/push 자동 안 함 — 운영자(성수) 정렬 회차에 수동 (검증 게이트 보존)
+  - [x] `commands/draft-storyboard.md` ⓪ 섹션 + 옵션 6 처리 갱신
+  - [x] `plugins/exec-content-marketing/feedback-pending.md` Tier 2 골격 신규 생성
 - [ ] **v1 실측 → ④ 분리 여부 결정** (draft-storyboard 정렬 후)
   - [ ] 현승님과 2~3케이스 실측 — 단계별 품질 측정 (소구점·후킹·논리·대본 각각)
   - [ ] 병목이 ④(대본 카피 품질·후반부 저하·컨텍스트 오염)로 확인되면 → `script-writer` subagent 분리
