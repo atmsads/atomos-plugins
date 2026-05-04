@@ -1,0 +1,9 @@
+{
+  "name": "exec-content-marketing",
+  "version": "0.1.0",
+  "description": "ION 콘텐츠 마케팅 팀장용 환경. 영상 광고 스토리보드·대본 5개 기획 자동화.",
+  "author": {
+    "name": "ION Platform"
+  },
+  "keywords": ["executive", "content", "marketing", "storyboard", "script", "ion"]
+}

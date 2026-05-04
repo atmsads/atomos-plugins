@@ -11,15 +11,19 @@
 
 ## 2. 사용자 & 운영 흐름
 
+**변경 (2026-05-04)**: 현승님이 2026-05-10 주말 전 퇴사 확정. 파일럿 단계 생략 → 민지님이 1차 사용자로 직행.
+
 ```
-현승(콘텐츠 마케팅 팀장, 파일럿) ──▶ 민지(실무 컨펌자, 이관 타깃)
-         │
-         └─ 현승님이 먼저 써서 "이거 쓸 만하다" 검증되면 민지 님에게 설치·교육 후 이관.
-            피드백은 현승님이 1차 수집 → 다음 턴 암묵지 업데이트에 반영.
+[~2026-05-09 현승 퇴사 전]                      [2026-05-10 이후]
+현승(파일럿·암묵지 원천, 잔여 1주)  ─이관─▶  민지(1차 사용자, 실무·피드백 수집)
+                                                       │
+                                                       └─ 콘텐츠 마케터 5명 (민지 컨펌)
 ```
 
-- 최종 생산 주체: 콘텐츠 마케터 5명 (민지 님이 2차 컨펌).
-- 현승님 역할: 소구점 도출 주관(직접 머리로), 방향성 잡기, 팀장 간 원칙 정렬.
+- 잔여 1주 (~2026-05-09): 현승님 마지막 검증 + 민지님 인수인계 (설치·사용법·피드백 루프 운영).
+- 2026-05-10 이후: 민지님이 직접 사용. 피드백은 (C) 옵션 6 → Tier 1 → Tier 2 → 운영자(성수) 검토 흐름으로 수집. 현승님 부재로 "암묵지 원천" 1차 수집 채널이 끊김 → `knowledge/` 5종 원문이 유일한 권위 (이게 박혀있는 게 천만다행).
+- 운영자 검토 부담 ↑: 현승님의 "방향성·원칙 정렬" 판단 없이 성수가 정렬 회차에 단독으로 정식 룰 승격 여부 결정. 모호한 케이스는 민지님과 직접 협의.
+- 최종 생산 주체: 콘텐츠 마케터 5명 (민지님 컨펌).
 
 ## 3. 에이전트 스펙: `storyboard-writer`
 
@@ -266,7 +270,7 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 | **피드백 자동화 레벨 결정** — 레벨 0 유지 (현재 패턴: 피드백 → 성수 묶어 처리). 레벨 1 도입 트리거: 정렬 매주 1회+ / 큐 10건+ / 사용자 명시 요청 | ✅ 2026-04-27 결정 | 성수 |
 | `storyboard-writer` v1 실측 → 병목 진단 → ④ 분리 여부 결정 | ⏳ 2~3케이스 실측 후 | 성수 + 현승 |
 | `script-writer` subagent 분리 (조건부 — ④가 병목일 때만) | ⏳ 분리 결정 후 | 성수 |
-| 플러그인 스켈레톤(plugin.json / CLAUDE.md / marketplace 엔트리) | ⏳ 다음 (영속화 결정 완료) | 성수 |
+| 플러그인 스켈레톤(plugin.json / CLAUDE.md / marketplace 엔트리) | ✅ 2026-05-04 | 성수 |
 | 2번째 에이전트 스펙 (`image-brief-writer`) | 미정 (현재 플러그인 완성 후) | 성수 + 현승 |
 
 ## 5. 플러그인 등록 (예정)
@@ -380,10 +384,10 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
   - [ ] 분리 시 메인 → subagent 인터페이스: 타겟·소구점·후킹·논리 **고정값으로 명시 전달** (머신러닝 꼬임 방지)
   - [ ] 5개 대본 **병렬 호출** 가능성 검토 (속도 + 후반부 품질 저하 방지)
   - [ ] 병목이 ②③에 있으면 분리 대신 프롬프트 교정 (brand-researcher v0→v1 패턴)
-- [ ] **플러그인 스켈레톤 작성** (작업 명세는 `~/.claude/projects/.../memory/project_storyboard_skeleton_scope.md` 참조)
-  - [ ] `plugins/exec-content-marketing/.claude-plugin/plugin.json` (참고: `plugins/exec-marketing/.claude-plugin/plugin.json`)
-  - [ ] `plugins/exec-content-marketing/CLAUDE.md` (참고: `plugins/exec-marketing/CLAUDE.md`. 룰 본문 복붙 X — 메타·역할·경로·범위만)
-  - [ ] `.claude-plugin/marketplace.json` 엔트리 추가 (§5 초안 그대로)
+- [x] **플러그인 스켈레톤 작성** (2026-05-04)
+  - [x] `plugins/exec-content-marketing/.claude-plugin/plugin.json` — name·version·description·author·keywords (exec-marketing 스키마 정합)
+  - [x] `plugins/exec-content-marketing/CLAUDE.md` — 사용자·의존성·주요 자산·피드백 영속화 메커니즘·작업 원칙·범위 외 (룰 본문 복붙 없음)
+  - [x] `.claude-plugin/marketplace.json` 엔트리 추가 (§5 초안 그대로) — JSON syntax validate 통과
 - [ ] **로컬 검증** (스켈레톤 작성 후)
   - [ ] `/plugin marketplace add ~/Documents/GitHub/atomos-plugins`
   - [ ] `/plugin install exec-content-marketing@ion-execs`
@@ -391,12 +395,12 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 - [ ] **Cowork 모드 검증** (사용자 직접)
   - [ ] 데스크탑 앱 Cowork(⌘2) 모드에서 plugin 설치 시도
   - [ ] `/draft-storyboard` 호출·MCP(Playwright·ATMS) 동작 확인
-  - [ ] 안 되면 현승님께 Code 모드 사용 안내
+  - [ ] 안 되면 민지님께 Code 모드 사용 안내
 
-### 검증 & 이관
-- [ ] 현승님에게 스켈레톤 시연 (Code 모드 우선, Cowork 동작 확인되면 Cowork)
-- [ ] 피드백 수집 → 프롬프트 보정 (레벨 0 패턴: 누적 → 묶어 정렬)
-- [ ] 민지 님에게 설치 및 사용법 교육
+### 검증 & 이관 (2026-05-04 갱신 — 현승님 2026-05-10 주말 전 퇴사)
+- [ ] **잔여 1주 (~2026-05-09)**: 현승님 마지막 검증 — 스켈레톤 시연 + 임의 케이스 1~2건 재출력 정상 동작 합의 (Code 모드 우선)
+- [ ] **인수인계 세션** (~2026-05-09 내): 민지님 동석 → 설치·사용법·피드백 루프 (C) 옵션 6 분류 질문·Tier 1 영속화 흐름 교육
+- [ ] **2026-05-10 이후 민지님 1차 사용 시작**: 피드백 수집 → 운영자(성수) 검토 → 정식 룰 승격 (현승님 부재로 "방향성·원칙 정렬" 판단 부재 → 모호 케이스는 민지님과 직접 협의)
 - [ ] 2~3주 운영 후 피드백 루프 설계 — 레벨 1 트리거 충족 여부 판단
 
 ## 8. 참고 자료

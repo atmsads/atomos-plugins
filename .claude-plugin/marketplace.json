@@ -24,6 +24,14 @@
       "version": "0.1.0",
       "category": "executive",
       "tags": ["marketing", "atms", "ads", "executive"]
+    },
+    {
+      "name": "exec-content-marketing",
+      "source": "./plugins/exec-content-marketing",
+      "description": "콘텐츠 마케팅 팀장용 환경 — 영상 광고 스토리보드·대본 기획 자동화",
+      "version": "0.1.0",
+      "category": "executive",
+      "tags": ["content", "marketing", "storyboard", "script", "executive"]
     }
   ]
 }
