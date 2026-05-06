@@ -74,11 +74,12 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 
 입력: `brand-researcher` 와 동일 — 브랜드/업체명·제품명·매체 (카테고리는 `brand-researcher` 결과에서 역추론 or 사용자 입력에서 추출)
 
-출력 4블록 (v1.3, 2026-04-24 확정):
+출력 5블록 (v1.4, 2026-05-06 확정):
 1. **경쟁사 리스트** — 네이버 쇼핑 랭킹순/리뷰순 + 네이버 블로그 상위 + 유튜브 조회수 상위의 **교차검증**으로 공통 등장 업체만 선정. `knowledge/01-시장-조사.md` §6 "공통적으로 존재하거나 가장 많이 언급된 업체들 최종 경쟁사로 선정" 원문 준수, 개수 강제 범위 없음.
 2. **경쟁사별 비교표** — 가격·용량·핵심 특장점·**밀고 있는 소구** 열 포함 (`knowledge/01-시장-조사.md` §9 토마토주스 표 형식 참조).
 3. **트렌드 관찰** — `knowledge/01-시장-조사.md` §5 "조회수 높은 영상 특징 및 업체 파악" 범위까지만. 임의 앵글 분류 카테고리·조회수 임계값 부여하지 않음.
-4. **사각지대 · 한계** — 도구 접근 불가 영역 "미확보" 명시 + 서술형 맥락 (우회·축 미수집 등).
+4. **쇼츠 광고 카피 표본 (v1.4 신규)** — §2 C축에서 식별한 영상 풀 중 쇼츠 톱뷰 5개. 각 영상 메타(제목·채널·조회수·업로드일·길이) + 설명란 본문(원문) + 상위 댓글 3개(원문). 인스타 릴스 직접 접근 어려운 환경에서 유튜브 쇼츠를 트렌드 신호로 활용 (사용자 결정 2026-05-06). long form 자막은 timedtext API 봇 차단으로 미수집 (검증 2026-05-06).
+5. **사각지대 · 한계** — 도구 접근 불가 영역 "미확보" 명시 + 서술형 맥락 (우회·축 미수집·long form 자막 미수집 등).
 
 ~~빈 소구 공간 블록 / 참고 레이어 조건부 블록~~ — v1.2(빈 소구 공간)·v1.3(참고 레이어) 에서 제거됨. 이유: "빈 소구 공간" 3구간 분류(🔴🟡🟢)·임계값·참고 레이어 조건부 블록 모두 현승님 암묵지 문서에 없는 AI 임의 설계 (`feedback_no_ad_lib_additions.md` 룰 위반). 경쟁사 카피 원문 나열까지만 수행 → 차별점·광고 방향 판단은 메인 에이전트·팀장 영역 (`knowledge/01` §9 원칙).
 
@@ -255,6 +256,7 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 | `competitor-landscape` 실측 2건 통과 (삼대오백 글리펌프 / 프룻오브더룸 파자마 셋업) | ✅ 2026-04-24 | 성수 |
 | `competitor-landscape.md` v1.2 개정 — "빈 소구 공간 🔴🟡🟢 3구간" 블록 제거 (AI 임의 설계, `feedback_no_ad_lib_additions.md` 위반) | ✅ 2026-04-24 | 성수 |
 | `competitor-landscape.md` v1.3 개정 — A1/A2/A4/A6 수정 (3~5개 제약 / 플래그 라벨 / 후보 우선순위 / 트렌드 앵글 6카테고리·100만뷰 임계값) · A3 제거 (참고 레이어 블록) | ✅ 2026-04-24 | 성수 |
+| `competitor-landscape.md` v1.4 개정 — 쇼츠 톱뷰 5개 본문 추출(§6 신설) + 출력 5블록 + Playwright 검증 결과 반영(long form 자막 미수집 명시) | ✅ 2026-05-06 | 성수 |
 | Q-A 검증 — Claude Code agents/* 는 격리 컨텍스트 1회 호출용. 인터랙티브 다턴 대화에 부적합 → storyboard-writer 룰 전체를 `commands/draft-storyboard.md` 에 직접 작성 (agents/storyboard-writer.md 파일 없음) | ✅ 2026-04-26 | 성수 |
 | Q-B 확정 — knowledge 02·03·04 하이브리드 임베드 (분기 결정 룰만 인라인, 풀 텍스트는 경로 참조) | ✅ 2026-04-26 | 성수 |
 | `commands/draft-storyboard.md` v1 작성 (storyboard-writer 페르소나 + 4단계 파이프라인 + 출력 포맷 + 피드백 루프 + self-QA) | ✅ 2026-04-26 | 성수 |
@@ -319,7 +321,7 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
   - [x] WebFetch / Playwright 분기 로직 (SPA 쇼핑몰·Cafe24·네이버 모바일 URL)
   - [x] 출처 인용 + 신뢰도 표기 의무 + 편향 경고 플래그
 - [x] `plugins/exec-content-marketing/knowledge/` (5종 편입, 2026-04-23)
-- [x] `plugins/exec-content-marketing/agents/competitor-landscape.md` (v1.3, 2026-04-24)
+- [x] `plugins/exec-content-marketing/agents/competitor-landscape.md` (v1.4, 2026-05-06)
   - [x] 3축 교차검증(네이버 쇼핑 + 블로그 + 유튜브) → 공통 등장 업체 선정 (현승님 §6 원문 준수, 개수 강제 제약 없음)
   - [x] 경쟁사별 비교표 (가격·특장점·**밀고 있는 소구 카피 원문**)
   - [x] 트렌드 관찰 (유튜브 조회수 높은 영상 특징 — `knowledge/01` §5 원문 범위)
@@ -330,6 +332,7 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
   - [x] ~~참고 레이어 조건부 블록~~ → v1.3 제거 (AI 임의 설계, 사용자 재판단 결과 제거)
   - [x] ~~트렌드 앵글 6카테고리 + 100만 뷰 임계값~~ → v1.3 제거 (AI 임의)
   - [x] 도구 한계 영역 "미확보" 명시 (Q1 확정)
+  - [x] **§6 쇼츠 톱뷰 5개 본문 추출** (v1.4, 2026-05-06) — `ytInitialPlayerResponse` JSON 단일 evaluate 로 메타+설명란 추출, 댓글 상위 3개 cap, long form 자막은 timedtext 봇 차단으로 미수집(검증 완료)
   - [x] 네이버 쇼핑 차단 우회 fallback 유지 (기술 운영 룰, 사용자 승인)
   - [x] brand-researcher 와 동일 도구 스택 재활용 (WebSearch + WebFetch + Playwright MCP)
   - [x] 판단·분류 금지 원칙 명시 ("약한 소구·차별점·빈 공간·포화" 등 판정 라벨 부여 금지)
