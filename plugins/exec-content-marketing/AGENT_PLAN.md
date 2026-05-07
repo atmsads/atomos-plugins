@@ -262,6 +262,12 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 | `competitor-landscape.md` v1.7 개정 — §6 정렬 룰 명시 ("조회수 내림차순 상위 5개"). v1.6 검증 시 업로드일 최신순으로 잘못 정렬 케이스 발견해 보강 | ✅ 2026-05-07 | 성수 |
 | `competitor-landscape` 실측 #3·#4·#5 (바이탈플랜트 롤팬 v1.5/v1.6 검증) 통과 — 표 8컬럼·댓글 미수행·5개 ID 100% 재현·검색 쿼리 노출 ✅. v1.7 정렬 검증은 본 사이클 마무리에서 1회 추가 예정 | ✅ 2026-05-06~07 | 성수 |
 | `commands/draft-storyboard.md` v1.2 보강 — ③-a 후킹 단계에 "쇼츠 설명란 본문 = 트렌드 참고만(강제·복제 금지)" 1단락 추가 + ④ 인용 게이트에 "§6 쇼츠 본문 직접 복붙 금지" 1줄 명시. 사용자 표현: *"최신 래퍼런스는 이런식으로 했더라~ 이정도로 참고"* | ✅ 2026-05-07 | 성수 |
+| `commands/draft-storyboard.md` v1.4 가독성 보강 — Cowork 첫 실측에서 한 줄 인라인 `[카메라](지문)"대사"` 가 마크다운 렌더 자연 wrap 으로 합쳐져 라인 경계 흐려진 이슈 해결. (B) 출력 포맷을 (1) 카메라/지문/대사 **3줄 분리** + (2) 발화 블록 사이 **빈 줄 1개** + (3) 대사는 **인라인 코드(백틱) `` `"..."` ``** 로 감싸 시각 분리. 자체 점검 체크리스트 3항목 갱신 | ✅ 2026-05-07 | 성수 |
+| **Code 모드 plugin 설치 통과** — `/plugin marketplace add ~/Documents/GitHub/atomos-plugins` (directory source) → `/plugin install exec-base@ion-execs` + `/plugin install exec-content-marketing@ion-execs` → `/reload-plugins` "6 plugins · 15 skills · 10 agents · 7 hooks · 2 plugin MCP servers" | ✅ 2026-05-07 | 성수 |
+| **`/draft-storyboard` 첫 Code 실측 통과 — 로이첸 아이바큠 진공용기 세트 / Meta** — ① 두 서브에이전트 병렬 호출 통과(135K+147K toks, 446s+646s) → ② 후보1 "음식 죄책감 끝" 선택 → ③ 후킹 3개(pain·경각심·BnA) + 논리 α/β → ④ 대본 5개 + 촬영 소품 → (C) 옵션 1 종료. 사용자 verbatim: *"좋은 것 같아!"* | ✅ 2026-05-07 | 성수 |
+| **`seongsu/storyboard` → `main` 머지 (PR #1)** — `d3cedff` Cowork 검증을 위한 GitHub default 브랜치 반영. 12 commit + 신규 commit `ddc10f4` (v1.5~v1.7 + v1.2 보강) 묶어서 main 진입. `marketplace.json` 에 exec-content-marketing 엔트리·디렉토리 모두 main 반영 | ✅ 2026-05-07 | 성수 |
+| **subagent_type prefix 학습** — `Agent` tool 호출 시 plugin 에이전트는 `exec-content-marketing:` 네임스페이스 prefix 의무 (예: `exec-content-marketing:brand-researcher`). prefix 없이 호출 시 "Agent type ... not found" 에러. 첫 시도 → 에러 → 재시도 패턴으로 자동 학습 | ✅ 2026-05-07 | 성수 |
+| **`/exec-content-marketing:setup` 잉여 가설 1차 신호 (Code 모드)** — setup edit reject 상태에서 ① 리서치 진입했지만 권한 프롬프트 0건 관찰. 이미 켜진 `skipDangerousModePermissionPrompt: true` + `skipAutoPermissionPrompt: true` 로 상쇄됐을 가능성. **결정 보류** — Cowork 검증 결과 종합 후 폐기/유지 판단 | ⏸️ 보류 (2026-05-07) | 성수 |
 | Q-A 검증 — Claude Code agents/* 는 격리 컨텍스트 1회 호출용. 인터랙티브 다턴 대화에 부적합 → storyboard-writer 룰 전체를 `commands/draft-storyboard.md` 에 직접 작성 (agents/storyboard-writer.md 파일 없음) | ✅ 2026-04-26 | 성수 |
 | Q-B 확정 — knowledge 02·03·04 하이브리드 임베드 (분기 결정 룰만 인라인, 풀 텍스트는 경로 참조) | ✅ 2026-04-26 | 성수 |
 | `commands/draft-storyboard.md` v1 작성 (storyboard-writer 페르소나 + 4단계 파이프라인 + 출력 포맷 + 피드백 루프 + self-QA) | ✅ 2026-04-26 | 성수 |
@@ -272,7 +278,7 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
 | **v1.3 미진 영역 3건 해소** — (1) 경각심 후킹=정보 내레이터 화자 우선, (2) 자막 인서트 데이터 강한 케이스 한정, (3) 분량 12~30 확장 | ✅ 2026-04-27 | 성수 + 현승 |
 | **(C) 옵션 6 분류 질문 보강** (레벨 0' — "일회성 vs 룰" 분류 질문 + 룰 답 시 명시 인용·운영자 검토 후 반영 안내. mempalace 의존성 제거) | ✅ 2026-04-27 | 성수 |
 | **피드백 영속화 방식 결정** — 2-tier + 단계 태깅 채택 (2026-05-03). Tier 1 (`~/.claude/exec-content-marketing/user-feedback.md`, 즉시 활성·다음 세션 자동 주입) → 24h 1회 Tier 2 (`plugins/exec-content-marketing/feedback-pending.md`, git 추적·운영자 검토 큐) → 운영자 정렬 회차에 정식 룰 승격. git add/commit/push 자동 안 함 (검증 게이트 보존). 옵션 6 처리에 단계 태깅 질문(②/③/④/공통) 추가. | ✅ 2026-05-03 | 성수 |
-| **Cowork 모드 plugin/MCP 동작 검증** — 데스크탑 앱의 Cowork(⌘2) 모드에서 `/plugin install`·MCP 동작 확인. 안 되면 Code 모드 권장 | ⏳ 사용자 직접 진행 | 성수 |
+| **Cowork 모드 plugin/MCP 동작 검증** — 데스크탑 앱의 Cowork(⌘2) 모드에서 `/plugin install`·MCP 동작 확인. 안 되면 Code 모드 권장. **2026-05-07 1차 단서**: Cowork 디렉토리 → 플러그인 탭 진입 → "마켓플레이스 추가" 다이얼로그가 **GitHub `owner/repo` URL 만 받음 (로컬 디렉토리 옵션 없음)** → Cowork = 클라우드 에이전트 확정. main 머지·push 선행 후 `atmsads/atomos-plugins` 입력 단계까지 진행. | ⏳ 사용자 직접 진행 | 성수 |
 | **Playwright MCP 헤드리스 모드 결정** — 차단율 vs 시각 방해 트레이드오프. 현재는 헤드 모드 유지 (검증된 동작) | ⏸️ 보류 | 성수 |
 | **피드백 자동화 레벨 결정** — 레벨 0 유지 (현재 패턴: 피드백 → 성수 묶어 처리). 레벨 1 도입 트리거: 정렬 매주 1회+ / 큐 10건+ / 사용자 명시 요청 | ✅ 2026-04-27 결정 | 성수 |
 | `storyboard-writer` v1 실측 → 병목 진단 → ④ 분리 여부 결정 | ⏸️ 보류 (2026-05-06) — 현승 퇴사로 압축 실측 불가, 현 통합 v1.1 유지. 민지님 사용 누적 후 ④가 병목으로 드러나면 재평가 | 성수 + 민지 |
@@ -395,18 +401,27 @@ storyboard-writer ① 단계에서 **두 subagent 병렬 호출**:
   - [x] `plugins/exec-content-marketing/.claude-plugin/plugin.json` — name·version·description·author·keywords (exec-marketing 스키마 정합)
   - [x] `plugins/exec-content-marketing/CLAUDE.md` — 사용자·의존성·주요 자산·피드백 영속화 메커니즘·작업 원칙·범위 외 (룰 본문 복붙 없음)
   - [x] `.claude-plugin/marketplace.json` 엔트리 추가 (§5 초안 그대로) — JSON syntax validate 통과
-- [ ] **로컬 검증** (스켈레톤 작성 후)
-  - [ ] `/plugin marketplace add ~/Documents/GitHub/atomos-plugins`
-  - [ ] `/plugin install exec-content-marketing@ion-execs`
-  - [ ] `/draft-storyboard` 슬래시 커맨드 노출 확인 + v1.3 룰로 임의 케이스 1건 재출력 정상 동작
-- [ ] **Cowork 모드 검증** (사용자 직접)
-  - [ ] 데스크탑 앱 Cowork(⌘2) 모드에서 plugin 설치 시도
-  - [ ] `/draft-storyboard` 호출·MCP(Playwright·ATMS) 동작 확인
-  - [ ] 안 되면 민지님께 Code 모드 사용 안내
+- [x] **로컬 검증 (Code 모드)** (2026-05-07)
+  - [x] `/plugin marketplace add ~/Documents/GitHub/atomos-plugins` (directory source 등록)
+  - [x] `/plugin install exec-base@ion-execs` + `/plugin install exec-content-marketing@ion-execs`
+  - [x] `/reload-plugins` → "6 plugins · 15 skills · 10 agents · 7 hooks · 2 plugin MCP servers"
+  - [x] `/exec-content-marketing:draft-storyboard` 첫 실측 통과 (로이첸 아이바큠 / Meta) — ① 두 서브에이전트 병렬 → ② 후보1 선택 → ③·④ 자동 → (C) 옵션 1 종료. 사용자 verbatim *"좋은 것 같아!"*
+- [x] **`main` 머지 + push** (2026-05-07) — Cowork 검증 위해 GitHub default 브랜치 반영. PR #1 `d3cedff` (사용자 직접 머지). exec-content-marketing 코드·marketplace 엔트리 main 진입.
+- [⏳] **Cowork 모드 검증** (사용자 직접 진행 중)
+  - [⏳] 데스크탑 앱 Cowork(⌘2) → 디렉토리 → 플러그인 탭 → "마켓플레이스 추가" 다이얼로그까지 진입 확인. **GitHub URL 만 받음** (로컬 경로 옵션 없음 = 클라우드 에이전트 확정).
+  - [ ] `atmsads/atomos-plugins` 입력 → 동기화 → `exec-base` + `exec-content-marketing` 설치 가능?
+  - [ ] `/exec-content-marketing:draft-storyboard` 슬래시 커맨드 인식?
+  - [ ] **체크포인트 A (subagent)**: ① 리서치 진입 시 brand-researcher / competitor-landscape Task 호출 동작?
+  - [ ] **체크포인트 B (권한 프롬프트)**: WebSearch / WebFetch / mcp__playwright 권한 다이얼로그 거동? `~/.claude/settings.json` 의 `permissions.allow` / `skipAutoPermissionPrompt` 가 Cowork 에 적용되는가? → **`/exec-content-marketing:setup` 잉여 가설 종합 판단의 핵심**
+  - [ ] **체크포인트 C (Playwright MCP)**: competitor-landscape Playwright 호출 동작? 클라우드 에이전트 → 사용자 로컬 stdio MCP 연결 가능성 ≈ 20% 추정.
+  - [ ] 결과 분기:
+    - 통과(A·B·C 모두 ✓): 민지님 Cowork 모드 인수인계 가능
+    - 부분 미통과(특히 C): 민지님께 **Code 모드** 안내 = 메모리 박힌 플랜 B
+- [ ] **사용자 결과 보고 → 수정 사항 반영** (다음 세션 진입점) — 사용자 Cowork 검증 후 발견한 수정 포인트가 있으면 `commands/draft-storyboard.md` / `agents/*.md` / `setup.md` 등에 반영. setup 잉여 결정도 동시 처리.
 
 ### 검증 & 이관 (2026-05-04 갱신 — 현승님 2026-05-10 주말 전 퇴사)
 - [ ] **잔여 1주 (~2026-05-09)**: 현승님 마지막 검증 — 스켈레톤 시연 + 임의 케이스 1~2건 재출력 정상 동작 합의 (Code 모드 우선)
-- [ ] **인수인계 세션** (~2026-05-09 내): 민지님 동석 → 설치·사용법·피드백 루프 (C) 옵션 6 분류 질문·Tier 1 영속화 흐름 교육
+- [ ] **인수인계 세션** (~2026-05-09 내): 민지님 동석 → 설치·사용법·피드백 루프 (C) 옵션 6 분류 질문·Tier 1 영속화 흐름 교육. 사용 환경 결정 = Cowork 검증 결과에 종속.
 - [ ] **2026-05-10 이후 민지님 1차 사용 시작**: 피드백 수집 → 운영자(성수) 검토 → 정식 룰 승격 (현승님 부재로 "방향성·원칙 정렬" 판단 부재 → 모호 케이스는 민지님과 직접 협의)
 - [ ] 2~3주 운영 후 피드백 루프 설계 — 레벨 1 트리거 충족 여부 판단
 
